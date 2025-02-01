@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         disable_youtube_annotations
-// @version      1.0
+// @version      1.1
 // @description  This script turns off Youtube's annotations
 // @match        *.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
