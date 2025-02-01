@@ -36,7 +36,6 @@
                 }
 
                 for (let i = 0; i < all_labels.length; i++) {
-
                     if (all_labels[i].innerHTML == "Ambient mode") {
                         ambientModeToggle = all_labels[i].parentNode;
                         console.log(scriptName, ": ambientModeToggle found", ambientModeToggle);

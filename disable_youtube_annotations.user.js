@@ -51,7 +51,6 @@
         if(annotationsToggle) {
             uncheck(annotationsToggle);
         }
-                console.log(scriptName, ": test");
 
         setTimeout(disableAfterLoad, 5000);
     }
