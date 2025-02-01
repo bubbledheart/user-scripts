@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         disable_youtube_ambient_mode
-// @version      1.0
+// @version      1.1
 // @description  This script turns off Youtube's ambient mode features
 // @match        *.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
@@ -12,8 +12,13 @@
     'use strict';
 
     const scriptName = GM_info.script.name;
-    let ambientModeToggle;
     let settingsInitialized;
+    let ambientModeToggle;
+
+    function init() {
+        settingsInitialized = false;
+        ambientModeToggle = false;
+    }
 
     function uncheck(toggle) {
         if (toggle && toggle.getAttribute('aria-checked') === 'true') {
@@ -36,6 +41,7 @@
                 }
 
                 for (let i = 0; i < all_labels.length; i++) {
+
                     if (all_labels[i].innerHTML == "Ambient mode") {
                         ambientModeToggle = all_labels[i].parentNode;
                         console.log(scriptName, ": ambientModeToggle found", ambientModeToggle);
@@ -55,5 +61,12 @@
         setTimeout(disableAfterLoad, 5000);
     }
 
-    setTimeout(disableAfterLoad, 5000);
+    const timeout = setTimeout(disableAfterLoad, 5000);
+
+    // rerun script on youtube spf.js redirect
+    window.addEventListener('yt-navigate-finish', () => {
+        clearTimeout(timeout);
+        init();
+        setTimeout(disableAfterLoad, 5000);
+    });
 })();

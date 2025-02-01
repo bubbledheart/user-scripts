@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         disable_youtube_annotations
-// @version      1.1
+// @version      1.2
 // @description  This script turns off Youtube's annotations
 // @match        *.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
@@ -12,8 +12,13 @@
     'use strict';
 
     const scriptName = GM_info.script.name;
-    let annotationsToggle;
     let settingsInitialized;
+    let annotationsToggle;
+
+    function init() {
+        settingsInitialized = false;
+        annotationsToggle = false;
+    }
 
     function uncheck(toggle) {
         if (toggle && toggle.getAttribute('aria-checked') === 'true') {
@@ -55,5 +60,12 @@
         setTimeout(disableAfterLoad, 5000);
     }
 
-    setTimeout(disableAfterLoad, 5000);
+    const timeout = setTimeout(disableAfterLoad, 5000);
+
+    // rerun script on youtube spf.js redirect
+    window.addEventListener('yt-navigate-finish', () => {
+        clearTimeout(timeout);
+        init();
+        setTimeout(disableAfterLoad, 5000);
+    });
 })();
