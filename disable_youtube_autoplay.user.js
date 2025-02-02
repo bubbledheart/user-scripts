@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         disable_youtube_autoplay
-// @version      1.1
+// @version      1.2
 // @description  This script turns off Youtube's annotations and ambient mode features
 // @match        *.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
@@ -8,7 +8,7 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     const scriptName = GM_info.script.name;
@@ -20,7 +20,7 @@
 
     function isWatchPage() {
         const currentPath = window.location.pathname;
-        if(currentPath.endsWith('/watch')) {
+        if (currentPath.endsWith('/watch')) {
             return true;
         }
         return false;
@@ -34,16 +34,16 @@
     }
 
     function disableAfterLoad() {
-        if(!isWatchPage()) {
+        if (!isWatchPage()) {
             console.log(scriptName, ": not on a watch page");
             return;
         }
 
-        if(!autoplayToggle) {
+        if (!autoplayToggle) {
             autoplayToggle = document.querySelector(".ytp-autonav-toggle-button");
         }
 
-        if(autoplayToggle) {
+        if (autoplayToggle) {
             uncheck(autoplayToggle);
         }
 
@@ -58,4 +58,5 @@
         init();
         setTimeout(disableAfterLoad, 5000);
     });
+
 })();

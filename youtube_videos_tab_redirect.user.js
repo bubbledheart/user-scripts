@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         youtube_videos_tab_redirect
-// @version      1.0
+// @version      1.1
 // @description  Redirects automatically to the videos tab if a channel home page is requested
 // @match        *.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
@@ -8,24 +8,24 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     const scriptName = GM_info.script.name;
 
-    function notEmptyFilter(item){
+    function notEmptyFilter(item) {
         return item.length;
     }
 
-    document.addEventListener('yt-navigate-start', function(event){
+    document.addEventListener('yt-navigate-start', function (event) {
         redirectIfNeeded(event.detail.url);
         return false;
     });
 
-    function redirectIfNeeded(url){
+    function redirectIfNeeded(url) {
         const currentPath = window.location.pathname;
         let parts = url.split('/').filter(notEmptyFilter);
-        if(!parts || parts.length === 0) {
+        if (!parts || parts.length === 0) {
             return;
         }
         let channelName = parts[0].match(/^@[^/]+/);
@@ -39,4 +39,5 @@
     }
 
     redirectIfNeeded(location.pathname);
+
 })();

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         disable_youtube_ambient_mode
-// @version      1.2
+// @version      1.3
 // @description  This script turns off Youtube's ambient mode features
 // @match        *.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
@@ -8,7 +8,7 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     const scriptName = GM_info.script.name;
@@ -22,7 +22,7 @@
 
     function isWatchPage() {
         const currentPath = window.location.pathname;
-        if(currentPath.endsWith('/watch')) {
+        if (currentPath.endsWith('/watch')) {
             return true;
         }
         return false;
@@ -36,19 +36,19 @@
     }
 
     function disableAfterLoad() {
-        if(!isWatchPage()) {
+        if (!isWatchPage()) {
             console.log(scriptName, ": not on a watch page");
             return;
         }
 
-        if(!settingsInitialized) {
+        if (!settingsInitialized) {
             let settings_button = document.querySelector(".ytp-settings-button");
-            if(settings_button) {
+            if (settings_button) {
                 settings_button.click();
                 settings_button.click();
 
                 let all_labels = document.querySelectorAll(".ytp-menuitem-label");
-                if(all_labels.length > 0) {
+                if (all_labels.length > 0) {
                     settingsInitialized = true;
                     console.log(scriptName, ": settings initialized");
                 }
@@ -61,13 +61,13 @@
                     }
                 }
             }
-            if(!ambientModeToggle) {
+            if (!ambientModeToggle) {
                 console.log(scriptName, ": no ambientModeToggle found");
                 return;
             }
         }
 
-        if(ambientModeToggle) {
+        if (ambientModeToggle) {
             uncheck(ambientModeToggle);
         }
 
@@ -82,4 +82,5 @@
         init();
         setTimeout(disableAfterLoad, 5000);
     });
+
 })();
