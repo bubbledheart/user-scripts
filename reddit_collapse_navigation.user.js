@@ -12,7 +12,7 @@
 
     const scriptName = GM_info.script.name;
 
-    function hideNavBar() {
+    function collapseNavBar() {
 
         if(isNavBarHidden()) {
             return;
@@ -28,6 +28,6 @@
         return document.querySelector("#flex-left-nav-contents").hidden;
     }
 
-    setTimeout(hideNavBar, 500);
+    setTimeout(collapseNavBar, 500);
 
 })();
