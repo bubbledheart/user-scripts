@@ -1,4 +1,3 @@
-
 // ==UserScript==
 // @name         youtube_middleClickOnSearch_opensInNewTab
 // @namespace    https://youtube.com/

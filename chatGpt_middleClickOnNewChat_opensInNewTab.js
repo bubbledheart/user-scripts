@@ -1,4 +1,3 @@
-
 // ==UserScript==
 // @name         chatGpt_middleClickOnNewChat_opensInNewTab
 // @namespace    chatgpt-middle-click
